@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yoori Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <button class="menu-toggle" id="menuToggle">MENU</button>
+
+  <div class="menu-panel" id="menuPanel"></div>
+
+  <div class="layout" id="layout">
+    <div class="left">
+      <img class="left-image" id="leftImage" src="" alt="">
+    </div>
+    <div class="right" id="rightPanel">
+      <img class="right-cover" id="rightCover" src="" alt="">
+      <div class="project-images" id="projectImages"></div>
+      <div class="text-content" id="textContent"></div>
+    </div>
+  </div>
+
+<script>
+// ── LANDING 이미지 랜덤 ─────────────────────────────────────────────────
+const workImages = [
+  'image/work/work1.jpg','image/work/work2.jpg','image/work/work3.jpg',
+  'image/work/work4.jpg','image/work/work5.jpg','image/work/work6.jpg',
+  'image/work/work7.jpg','image/work/work8.jpg','image/work/work9.jpg',
+];
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+const shuffled = shuffle(workImages);
+document.getElementById('leftImage').src  = shuffled[0];
+document.getElementById('rightCover').src = shuffled[1];
+
+// ── 전시 이미지 데이터 ─────────────────────────────────────────────────
+const exhibitionImages = {
+  hakgojae: [
+    'image/exhibition-hakgojae/hakgojae1.jpg',
+    'image/exhibition-hakgojae/hakgojae2.jpg',
+    'image/exhibition-hakgojae/hakgojae3.jpg',
+    'image/exhibition-hakgojae/hakgojae4.jpg',
+    'image/exhibition-hakgojae/hakgojae5.jpg',
+    'image/exhibition-hakgojae/hakgojae6.jpg',
+    'image/exhibition-hakgojae/hakgojae7.jpg',
+    'image/exhibition-hakgojae/hakgojae8.jpg',
+    'image/exhibition-hakgojae/hakgojae9.jpg',
+    'image/exhibition-hakgojae/hakgojae10.jpg',
+    'image/exhibition-hakgojae/hakgojae11.jpg',
+    'image/exhibition-hakgojae/work1.jpg',
+    'image/exhibition-hakgojae/work2.jpg',
+    'image/exhibition-hakgojae/work3.jpg',
+    'image/exhibition-hakgojae/work4.jpg',
+    'image/exhibition-hakgojae/work5.jpg',
+    'image/exhibition-hakgojae/work6.jpg',
+    'image/exhibition-hakgojae/work7.jpg',
+    'image/exhibition-hakgojae/work8.jpg',
+    'image/exhibition-hakgojae/work9.jpg',
+    'image/exhibition-hakgojae/work10.jpg',
+    'image/exhibition-hakgojae/PIX00005.jpg',
+    'image/exhibition-hakgojae/PIX00044.jpg',
+    'image/exhibition-hakgojae/250919_16 복사 복사.jpg',
+    'image/exhibition-hakgojae/250919_54 복사.jpg',
+    'image/exhibition-hakgojae/250919_55 복사.jpg',
+  ],
+};
+
+// ── 메뉴 구조 데이터 ───────────────────────────────────────────────────
+// t: 'sep'=구분선 | 'nav'=직접이동 | 'label'=섹션제목
+//    'acc'=아코디언 | 'cat'=카테고리레이블 | 'show'=전시항목
+const menuStructure = [
+  { t: 'sep' },
+  { t: 'nav', label: 'C.V', key: 'cv' },
+  { t: 'sep' },
+  { t: 'nav', label: 'Contact', key: 'contact' },
+  { t: 'sep' },
+  {
+    t: 'acc', label: '▼ Texts',
+    items: [
+      { t: 'show', label: '유리님의 첫 번째 글' },
+      { t: 'show', label: '유리님의 두 번째 글' },
+      { t: 'show', label: '유리님의 세 번째 글' },
+    ],
+  },
+  { t: 'sep' },
+  {
+    t: 'acc', label: '▼ Publications',
+    items: [
+      { t: 'show', label: '유리님의 첫 번째 책' },
+      { t: 'show', label: '유리님의 두 번째 책' },
+      { t: 'show', label: '유리님의 세 번째 책' },
+    ],
+  },
+  { t: 'sep' },
+  { t: 'label', label: 'Works/Exhibitions' },
+  { t: 'sep' },
+  {
+    t: 'acc', label: '▼ 2026',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: '미시적 재난, oaoa갤러리, 서울' },
+      { t: 'show', label: '새의 선물:Borderline, 별관, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2025',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Solo exhibition' },
+      { t: 'show', label: '투명한 고리, 학고재, 서울', imgKey: 'hakgojae' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: '작은 거인들, 구하우스, 양평' },
+      { t: 'show', label: 'OCTO-, 페이지룸8 & 지우헌, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2024',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Solo exhibition' },
+      { t: 'show', label: '없는 날, 페이지룸8, 서울' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: '황금 화살, This Is Not a Church(구 명성교회), 서울' },
+      { t: 'show', label: '메신저의 신비한 결속, 대전시립미술관 대전창작센터, 대전' },
+      { t: 'show', label: '흰 작살을 머금은 바다, 서리풀청년아트갤러리, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2023',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Solo exhibition' },
+      { t: 'show', label: '느슨히 껴안고 단단히 풀기, 갤러리인HQ, 서울' },
+      { t: 'show', label: 'Double Bind: 아티스트북프로젝트, 포켓테일즈, 서울' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: 'Lucid Mystery / Dark Clarity : 김세은, 유리 2인전, 학고재, 서울' },
+      { t: 'show', label: 'OCTO-, 페이지룸8, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2022',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: 'Local Christmas Market, 디 언타이틀드 보이드, 서울' },
+      { t: 'show', label: '불완전한 세계에서 완전한 경계로 : 신소언, 유리 2인전, 페이지룸8, 서울' },
+      { t: 'show', label: 'Hop, Hop, Hope, 갤러리 인 HQ, 서울' },
+      { t: 'show', label: 'Drawing Growing, 미학관, 서울' },
+      { t: 'show', label: 'Muddy Forest : 김옥정, 유리 2인전, 갤러리 인, 서울' },
+      { t: 'show', label: 'A에서 시작되는 울림, KT&G 상상마당 춘천 아트갤러리, 춘천' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2021',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Solo exhibition' },
+      { t: 'show', label: '이렇듯 포옹은 문장이 되지 못하고, 별관, 서울' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: 'The Painters, 서울옥션 강남센터, 서울' },
+      { t: 'show', label: '구름 모양: 유리, 이서윤 2인전, 갤러리 아노브, 서울' },
+      { t: 'show', label: '다시 만날 때까지, 아티스트런스페이스 쇼앤텔, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2020',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: '10의 n승, 문화역서울284 TMO창작유통공간, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2019',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: 'Zerobase: v2, 서울옥션 강남센터, 서울' },
+      { t: 'show', label: 'Taipei Artbook Fair, 송산 문창원구, 타이베이, 대만' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2018',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: '콘슈머맛팝콘, 임시공간 세네네, 서울' },
+      { t: 'show', label: '열두개의 서재, 돈의문박물관마을 내 서대문여관, 서울' },
+    ],
+  },
+  {
+    t: 'acc', label: '▼ 2015',
+    items: [
+      { t: 'cat', label: 'Selected works' },
+      { t: 'cat', label: 'Group Exhibition' },
+      { t: 'show', label: '마중물아트마켓, 김리아갤러리, 서울' },
+      { t: 'show', label: 'S.O.S (사운드 오브 샤웃), 토이리퍼블릭, 서울' },
+      { t: 'show', label: '완전한 맨숀, 삼원그린맨션, 서울' },
+    ],
+  },
+];
+
+// ── 텍스트 콘텐츠 ──────────────────────────────────────────────────────
+const cvHTML = `
+<p class="cv-name">유리 Yoori  b. 1994</p>
+
+<p class="cv-section">학력</p>
+<p class="cv-year">2018</p>
+<p>홍익대학교 미술대학 회화과 졸업</p>
+
+<p class="cv-section">개인전</p>
+<p class="cv-year">2025</p>
+<p>투명한 고리, 학고재, 서울</p>
+<p class="cv-year">2024</p>
+<p>없는 날, 페이지룸8, 서울</p>
+<p class="cv-year">2023</p>
+<p>느슨히 껴안고 단단히 풀기, 갤러리인HQ, 서울</p>
+<p>Double Bind: 아티스트북프로젝트, 포켓테일즈, 서울</p>
+<p class="cv-year">2021</p>
+<p>이렇듯 포옹은 문장이 되지 못하고, 별관, 서울</p>
+
+<p class="cv-section">단체전</p>
+<p class="cv-year">2026</p>
+<p>새의 선물:Borderline, 별관, 서울</p>
+<p class="cv-year">2025</p>
+<p>작은 거인들, 구하우스, 양평</p>
+<p>OCTO-, 페이지룸8 & 지우헌, 서울</p>
+<p class="cv-year">2024</p>
+<p>황금 화살, This Is Not a Church (구 명성교회), 서울</p>
+<p>메신저의 신비한 결속, 대전시립미술관 대전창작센터, 대전</p>
+<p>흰 작살을 머금은 바다, 서리풀청년아트갤러리, 서울</p>
+<p class="cv-year">2023</p>
+<p>Lucid Mystery / Dark Clarity : 김세은, 유리 2인전, 학고재, 서울</p>
+<p>OCTO-, 페이지룸8, 서울</p>
+<p class="cv-year">2022</p>
+<p>Local Christmas Market, 디 언타이틀드 보이드, 서울</p>
+<p>불완전한 세계에서 완전한 경계로 : 신소언, 유리 2인전, 페이지룸8, 서울</p>
+<p>Hop, Hop, Hope, 갤러리 인 HQ, 서울</p>
+<p>Drawing Growing, 미학관, 서울</p>
+<p>Muddy Forest : 김옥정, 유리 2인전, 갤러리 인, 서울</p>
+<p>A에서 시작되는 울림, KT&G 상상마당 춘천 아트갤러리, 춘천</p>
+<p class="cv-year">2021</p>
+<p>The Painters, 서울옥션 강남센터, 서울</p>
+<p>구름 모양: 유리, 이서윤 2인전, 갤러리 아노브, 서울</p>
+<p>다시 만날 때까지, 아티스트런스페이스 쇼앤텔, 서울</p>
+<p class="cv-year">2020</p>
+<p>10의 n승, 문화역서울284 TMO창작유통공간, 서울</p>
+<p class="cv-year">2019</p>
+<p>Zerobase: v2, 서울옥션 강남센터, 서울</p>
+<p class="cv-year">2018</p>
+<p>콘슈머맛팝콘, 임시공간 세네네, 서울</p>
+<p class="cv-year">2015</p>
+<p>마중물아트마켓, 김리아갤러리, 서울</p>
+<p>S.O.S (사운드 오브 샤웃), 토이리퍼블릭, 서울</p>
+<p>완전한 맨숀, 삼원그린맨션, 서울</p>
+
+<p class="cv-section">아티스트북 프로젝트</p>
+<p class="cv-year">2023</p>
+<p>Double Bind: 아티스트북프로젝트, 포켓테일즈, 서울</p>
+<p class="cv-year">2019</p>
+<p>Taipei Artbook Fair, 송산 문창원구, 타이베이, 대만</p>
+<p class="cv-year">2018</p>
+<p>열두개의 서재, 돈의문박물관마을 내 서대문여관, 서울</p>
+
+<p class="cv-section">수상/선정</p>
+<p class="cv-year">2025</p>
+<p>서울문화재단 예술창작활동지원, 서울문화재단, 서울</p>
+<p class="cv-year">2024</p>
+<p>서울문화재단 예술창작활동지원, 서울문화재단, 서울</p>
+<p class="cv-year">2021</p>
+<p>서울문화재단 예술창작활동지원, 서울문화재단, 서울</p>
+`;
+
+const contactHTML = `
+<p>email: brief.vom.mond@gmail.com</p>
+<p>instagram: @desvollmondes</p>
+`;
+
+// ── DOM REFS ───────────────────────────────────────────────────────────
+const menuToggle  = document.getElementById('menuToggle');
+const menuPanel   = document.getElementById('menuPanel');
+const layout      = document.getElementById('layout');
+const rightPanel  = document.getElementById('rightPanel');
+const rightCover  = document.getElementById('rightCover');
+const projectImgs = document.getElementById('projectImages');
+const textContent = document.getElementById('textContent');
+
+let menuOpen = false;
+
+// ── 메뉴 빌드 ─────────────────────────────────────────────────────────
+menuStructure.forEach(node => {
+  if (node.t === 'sep') {
+    menuPanel.appendChild(Object.assign(document.createElement('hr'), { className: 'menu-sep' }));
+    return;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.className = 'menu-inner';
+
+  if (node.t === 'nav') {
+    const el = document.createElement('div');
+    el.className = 'nav-item';
+    el.textContent = node.label;
+    el.addEventListener('click', () => onNavClick(node.key, el));
+    wrap.appendChild(el);
+
+  } else if (node.t === 'label') {
+    const el = document.createElement('div');
+    el.className = 'section-label';
+    el.textContent = node.label;
+    wrap.appendChild(el);
+
+  } else if (node.t === 'acc') {
+    const header = document.createElement('div');
+    header.className = 'acc-header';
+    header.textContent = node.label;
+
+    const body = document.createElement('div');
+    body.className = 'acc-body';
+
+    node.items.forEach(item => {
+      const el = document.createElement('div');
+      if (item.t === 'cat') {
+        el.className = 'cat-label';
+        el.textContent = item.label;
+      } else {
+        el.className = 'acc-item';
+        el.textContent = item.label;
+        el.addEventListener('click', () => onShowClick(item, el));
+      }
+      body.appendChild(el);
+    });
+
+    header.addEventListener('click', () => toggleAcc(body));
+    wrap.appendChild(header);
+    wrap.appendChild(body);
+  }
+
+  menuPanel.appendChild(wrap);
+});
+
+// ── 아코디언 토글 ─────────────────────────────────────────────────────
+function toggleAcc(body) {
+  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
+  menuPanel.querySelectorAll('.acc-body').forEach(b => b.style.maxHeight = '0px');
+  if (!isOpen) body.style.maxHeight = body.scrollHeight + 'px';
+}
+
+// ── nav 클릭 (C.V, Contact) ───────────────────────────────────────────
+function onNavClick(key, el) {
+  clearActive();
+  el.classList.add('active');
+  layout.classList.add('project-open');
+  rightCover.classList.add('hidden');
+  projectImgs.classList.remove('active');
+  projectImgs.innerHTML = '';
+
+  const html = key === 'cv' ? cvHTML : key === 'contact' ? contactHTML : '';
+  textContent.innerHTML = html;
+  textContent.classList.add('active');
+  rightPanel.scrollTop = 0;
+}
+
+// ── 전시 클릭 ─────────────────────────────────────────────────────────
+function onShowClick(item, el) {
+  clearActive();
+  el.classList.add('active');
+  layout.classList.add('project-open');
+  rightCover.classList.add('hidden');
+  textContent.classList.remove('active');
+  textContent.innerHTML = '';
+
+  const imgs = item.imgKey ? (exhibitionImages[item.imgKey] || []) : [];
+  projectImgs.innerHTML = '';
+  imgs.forEach(src => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = '';
+    projectImgs.appendChild(img);
+  });
+  projectImgs.classList.add('active');
+  rightPanel.scrollTop = 0;
+}
+
+// ── 전체 active 초기화 ────────────────────────────────────────────────
+function clearActive() {
+  menuPanel.querySelectorAll('.nav-item, .acc-item').forEach(el => el.classList.remove('active'));
+}
+
+// ── 랜딩 복귀 ────────────────────────────────────────────────────────
+function returnToLanding() {
+  clearActive();
+  menuPanel.querySelectorAll('.acc-body').forEach(b => b.style.maxHeight = '0px');
+  layout.classList.remove('project-open');
+  projectImgs.classList.remove('active');
+  projectImgs.innerHTML = '';
+  textContent.classList.remove('active');
+  textContent.innerHTML = '';
+  rightCover.classList.remove('hidden');
+  rightPanel.scrollTop = 0;
+}
+
+// ── MENU TOGGLE ───────────────────────────────────────────────────────
+menuToggle.addEventListener('click', () => {
+  menuOpen = !menuOpen;
+  menuPanel.classList.toggle('open', menuOpen);
+  menuToggle.textContent = menuOpen ? 'CLOSE' : 'MENU';
+  if (!menuOpen) returnToLanding();
+});
+</script>
+</body>
+</html>
