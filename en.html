@@ -114,7 +114,7 @@ const menuStructure = [
     t: 'acc', label: 'Works/Exhibitions',
     items: [
       {
-        t: 'acc', label: '▼ 2026',
+        t: 'acc', label: '2026',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Group Exhibition' },
@@ -122,7 +122,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2025',
+        t: 'acc', label: '2025',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Solo Exhibition' },
@@ -133,7 +133,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2024',
+        t: 'acc', label: '2024',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Solo Exhibition' },
@@ -145,7 +145,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2023',
+        t: 'acc', label: '2023',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Solo Exhibition' },
@@ -157,7 +157,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2022',
+        t: 'acc', label: '2022',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Group Exhibition' },
@@ -170,7 +170,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2021',
+        t: 'acc', label: '2021',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Solo Exhibition' },
@@ -182,7 +182,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2020',
+        t: 'acc', label: '2020',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Group Exhibition' },
@@ -190,7 +190,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2019',
+        t: 'acc', label: '2019',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Group Exhibition' },
@@ -199,7 +199,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2018',
+        t: 'acc', label: '2018',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Group Exhibition' },
@@ -208,7 +208,7 @@ const menuStructure = [
         ],
       },
       {
-        t: 'acc', label: '▼ 2015',
+        t: 'acc', label: '2015',
         items: [
           { t: 'cat', label: 'Selected works' },
           { t: 'cat', label: 'Group Exhibition' },
@@ -313,7 +313,7 @@ let menuOpen = false;
 let currentState = null;
 
 // ── 메뉴 아이템 재귀 빌드 ─────────────────────────────────────────────
-function buildItems(container, items) {
+function buildItems(container, items, usePrefix = false) {
   items.forEach(item => {
     if (item.t === 'cat') {
       const el = document.createElement('div');
@@ -325,17 +325,24 @@ function buildItems(container, items) {
       el.className = 'acc-item';
       el.dataset.imgKey = item.imgKey || '';
       el.dataset.itemLabel = item.label;
-      el.textContent = item.label;
+      el.textContent = usePrefix ? '- ' + item.label : item.label;
       el.addEventListener('click', () => onShowClick(item, el));
       container.appendChild(el);
     } else if (item.t === 'acc') {
       const wrap = document.createElement('div');
       const header = document.createElement('div');
       header.className = 'acc-header';
-      header.textContent = item.label;
+      const isYear = /^\d{4}$/.test(item.label);
+      if (isYear) {
+        header.dataset.label = item.label;
+        header.dataset.arrow = '1';
+        header.textContent = '▶ ' + item.label;
+      } else {
+        header.textContent = item.label;
+      }
       const body = document.createElement('div');
       body.className = 'acc-body';
-      buildItems(body, item.items);
+      buildItems(body, item.items, isYear);
       header.addEventListener('click', () => toggleAcc(body));
       wrap.appendChild(header);
       wrap.appendChild(body);
@@ -381,11 +388,15 @@ function toggleAcc(body) {
     grandparent.querySelectorAll(':scope > * > .acc-body').forEach(b => {
       b.style.maxHeight = '0px';
       b.classList.remove('open');
+      const h = b.previousElementSibling;
+      if (h && h.dataset.arrow) { h.textContent = '▶ ' + h.dataset.label; h.classList.remove('is-open'); }
     });
   }
   if (!isOpen) {
     body.classList.add('open');
     body.style.maxHeight = '9999px';
+    const header = body.previousElementSibling;
+    if (header && header.dataset.arrow) { header.textContent = '▼ ' + header.dataset.label; header.classList.add('is-open'); }
   }
 }
 
@@ -507,6 +518,8 @@ function restoreStateFromURL() {
       while (ancestor) {
         ancestor.classList.add('open');
         ancestor.style.maxHeight = '9999px';
+        const h = ancestor.previousElementSibling;
+        if (h && h.dataset.arrow) { h.textContent = '▼ ' + h.dataset.label; h.classList.add('is-open'); }
         ancestor = ancestor.parentElement?.closest('.acc-body');
       }
       onShowClick({ imgKey: el.dataset.imgKey || null, label: el.dataset.itemLabel }, el);

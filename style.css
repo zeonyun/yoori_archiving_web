@@ -178,6 +178,10 @@ html, body {
 
 /* ── 아코디언 헤더 ────────────────────────────────── */
 .acc-header {
+  padding: 5px 0;
+}
+
+.menu-inner > .acc-header {
   padding: 8px 0;
   cursor: pointer;
   line-height: 1;
@@ -194,25 +198,36 @@ html, body {
   padding-bottom: 0;
 }
 
+.acc-header.is-open {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: #000;
+}
+
+/* 연도 아코디언 내부: ▼ 너비만큼 들여쓰기 */
+.acc-body > div > .acc-body {
+  padding-left: 1.3em;
+}
+
 .acc-body.open {
-  padding-bottom: 8px;
+  padding-bottom: 5px;
 }
 
 /* ── 카테고리 레이블 ──────────────────────────────── */
 .cat-label {
-  padding: 8px 0;
+  padding: 5px 0;
   line-height: 1;
   color: #000;
-  opacity: 0.4;
   user-select: none;
   display: block;
 }
 
 /* ── 전시/항목 (클릭 가능) ────────────────────────── */
 .acc-item {
-  padding: 8px 0;
+  padding: 5px 0;
   cursor: pointer;
-  line-height: 1;
+  line-height: 1.5;
+  white-space: pre-line;
   color: #000;
   user-select: none;
   display: block;
