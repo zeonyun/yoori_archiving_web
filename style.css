@@ -81,7 +81,8 @@ html, body {
   text-decoration: none;
 }
 
-.lang-btn.content-open {
+.lang-btn.content-open,
+.menu-toggle.content-open {
   background: #000;
   color: var(--bg, #faf9f6);
 }

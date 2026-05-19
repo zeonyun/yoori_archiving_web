@@ -399,6 +399,7 @@ function onNavClick(key, el) {
   updateLangHref();
   layout.classList.add('project-open');
   langBtn.classList.add('content-open');
+  menuToggle.classList.add('content-open');
   rightCover.classList.add('hidden');
   projectImgs.classList.remove('active');
   projectImgs.innerHTML = '';
@@ -418,6 +419,7 @@ function onShowClick(item, el) {
   updateLangHref();
   layout.classList.add('project-open');
   langBtn.classList.add('content-open');
+  menuToggle.classList.add('content-open');
   rightCover.classList.add('hidden');
   textContent.classList.remove('active');
   textContent.innerHTML = '';
@@ -446,6 +448,7 @@ function returnToLanding() {
   currentState = null;
   updateLangHref();
   langBtn.classList.remove('content-open');
+  menuToggle.classList.remove('content-open');
   menuPanel.querySelectorAll('.acc-body').forEach(b => { b.style.maxHeight = '0px'; b.classList.remove('open'); });
   layout.classList.remove('project-open');
   projectImgs.classList.remove('active');
