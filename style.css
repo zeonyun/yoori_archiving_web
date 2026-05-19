@@ -320,10 +320,10 @@ html, body {
   .project-open .right { width: 100%; height: 100%; margin-left: 0; }
 
   .menu-panel {
-    width: 75vw;
+    width: 100vw;
   }
 
   .menu-divider {
-    left: 75vw;
+    display: none !important;
   }
 }

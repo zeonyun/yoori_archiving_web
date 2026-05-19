@@ -87,8 +87,6 @@ const exhibitionImages = {
 };
 
 // ── 메뉴 구조 데이터 ───────────────────────────────────────────────────
-// t: 'sep'=구분선 | 'nav'=직접이동 | 'label'=섹션제목
-//    'acc'=아코디언 | 'cat'=카테고리레이블 | 'show'=전시항목
 const menuStructure = [
   { t: 'sep' },
   { t: 'nav', label: '약력', key: 'cv' },
@@ -113,111 +111,114 @@ const menuStructure = [
     ],
   },
   { t: 'sep' },
-  { t: 'label', label: '작품·전시' },
-  { t: 'sep' },
   {
-    t: 'acc', label: '▼ 2026',
+    t: 'acc', label: '작품·전시',
     items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: '미시적 재난, oaoa갤러리, 서울' },
-      { t: 'show', label: '새의 선물:Borderline, 별관, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2025',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Solo exhibition' },
-      { t: 'show', label: '투명한 고리, 학고재, 서울', imgKey: 'hakgojae' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: '작은 거인들, 구하우스, 양평' },
-      { t: 'show', label: 'OCTO-, 페이지룸8 & 지우헌, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2024',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Solo exhibition' },
-      { t: 'show', label: '없는 날, 페이지룸8, 서울' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: '황금 화살, This Is Not a Church(구 명성교회), 서울' },
-      { t: 'show', label: '메신저의 신비한 결속, 대전시립미술관 대전창작센터, 대전' },
-      { t: 'show', label: '흰 작살을 머금은 바다, 서리풀청년아트갤러리, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2023',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Solo exhibition' },
-      { t: 'show', label: '느슨히 껴안고 단단히 풀기, 갤러리인HQ, 서울' },
-      { t: 'show', label: 'Double Bind: 아티스트북프로젝트, 포켓테일즈, 서울' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: 'Lucid Mystery / Dark Clarity : 김세은, 유리 2인전, 학고재, 서울' },
-      { t: 'show', label: 'OCTO-, 페이지룸8, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2022',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: 'Local Christmas Market, 디 언타이틀드 보이드, 서울' },
-      { t: 'show', label: '불완전한 세계에서 완전한 경계로 : 신소언, 유리 2인전, 페이지룸8, 서울' },
-      { t: 'show', label: 'Hop, Hop, Hope, 갤러리 인 HQ, 서울' },
-      { t: 'show', label: 'Drawing Growing, 미학관, 서울' },
-      { t: 'show', label: 'Muddy Forest : 김옥정, 유리 2인전, 갤러리 인, 서울' },
-      { t: 'show', label: 'A에서 시작되는 울림, KT&G 상상마당 춘천 아트갤러리, 춘천' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2021',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Solo exhibition' },
-      { t: 'show', label: '이렇듯 포옹은 문장이 되지 못하고, 별관, 서울' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: 'The Painters, 서울옥션 강남센터, 서울' },
-      { t: 'show', label: '구름 모양: 유리, 이서윤 2인전, 갤러리 아노브, 서울' },
-      { t: 'show', label: '다시 만날 때까지, 아티스트런스페이스 쇼앤텔, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2020',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: '10의 n승, 문화역서울284 TMO창작유통공간, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2019',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: 'Zerobase: v2, 서울옥션 강남센터, 서울' },
-      { t: 'show', label: 'Taipei Artbook Fair, 송산 문창원구, 타이베이, 대만' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2018',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: '콘슈머맛팝콘, 임시공간 세네네, 서울' },
-      { t: 'show', label: '열두개의 서재, 돈의문박물관마을 내 서대문여관, 서울' },
-    ],
-  },
-  {
-    t: 'acc', label: '▼ 2015',
-    items: [
-      { t: 'cat', label: 'Selected works' },
-      { t: 'cat', label: 'Group Exhibition' },
-      { t: 'show', label: '마중물아트마켓, 김리아갤러리, 서울' },
-      { t: 'show', label: 'S.O.S (사운드 오브 샤웃), 토이리퍼블릭, 서울' },
-      { t: 'show', label: '완전한 맨숀, 삼원그린맨션, 서울' },
+      {
+        t: 'acc', label: '▼ 2026',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: '미시적 재난, oaoa갤러리, 서울' },
+          { t: 'show', label: '새의 선물:Borderline, 별관, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2025',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Solo exhibition' },
+          { t: 'show', label: '투명한 고리, 학고재, 서울', imgKey: 'hakgojae' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: '작은 거인들, 구하우스, 양평' },
+          { t: 'show', label: 'OCTO-, 페이지룸8 & 지우헌, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2024',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Solo exhibition' },
+          { t: 'show', label: '없는 날, 페이지룸8, 서울' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: '황금 화살, This Is Not a Church(구 명성교회), 서울' },
+          { t: 'show', label: '메신저의 신비한 결속, 대전시립미술관 대전창작센터, 대전' },
+          { t: 'show', label: '흰 작살을 머금은 바다, 서리풀청년아트갤러리, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2023',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Solo exhibition' },
+          { t: 'show', label: '느슨히 껴안고 단단히 풀기, 갤러리인HQ, 서울' },
+          { t: 'show', label: 'Double Bind: 아티스트북프로젝트, 포켓테일즈, 서울' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: 'Lucid Mystery / Dark Clarity : 김세은, 유리 2인전, 학고재, 서울' },
+          { t: 'show', label: 'OCTO-, 페이지룸8, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2022',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: 'Local Christmas Market, 디 언타이틀드 보이드, 서울' },
+          { t: 'show', label: '불완전한 세계에서 완전한 경계로 : 신소언, 유리 2인전, 페이지룸8, 서울' },
+          { t: 'show', label: 'Hop, Hop, Hope, 갤러리 인 HQ, 서울' },
+          { t: 'show', label: 'Drawing Growing, 미학관, 서울' },
+          { t: 'show', label: 'Muddy Forest : 김옥정, 유리 2인전, 갤러리 인, 서울' },
+          { t: 'show', label: 'A에서 시작되는 울림, KT&G 상상마당 춘천 아트갤러리, 춘천' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2021',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Solo exhibition' },
+          { t: 'show', label: '이렇듯 포옹은 문장이 되지 못하고, 별관, 서울' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: 'The Painters, 서울옥션 강남센터, 서울' },
+          { t: 'show', label: '구름 모양: 유리, 이서윤 2인전, 갤러리 아노브, 서울' },
+          { t: 'show', label: '다시 만날 때까지, 아티스트런스페이스 쇼앤텔, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2020',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: '10의 n승, 문화역서울284 TMO창작유통공간, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2019',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: 'Zerobase: v2, 서울옥션 강남센터, 서울' },
+          { t: 'show', label: 'Taipei Artbook Fair, 송산 문창원구, 타이베이, 대만' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2018',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: '콘슈머맛팝콘, 임시공간 세네네, 서울' },
+          { t: 'show', label: '열두개의 서재, 돈의문박물관마을 내 서대문여관, 서울' },
+        ],
+      },
+      {
+        t: 'acc', label: '▼ 2015',
+        items: [
+          { t: 'cat', label: 'Selected works' },
+          { t: 'cat', label: 'Group Exhibition' },
+          { t: 'show', label: '마중물아트마켓, 김리아갤러리, 서울' },
+          { t: 'show', label: 'S.O.S (사운드 오브 샤웃), 토이리퍼블릭, 서울' },
+          { t: 'show', label: '완전한 맨숀, 삼원그린맨션, 서울' },
+        ],
+      },
     ],
   },
 ];
@@ -312,7 +313,38 @@ const langBtn      = document.getElementById('langBtn');
 
 let menuOpen = false;
 let currentState = null;
-let firstYearSeen = false;
+
+// ── 메뉴 아이템 재귀 빌드 ─────────────────────────────────────────────
+function buildItems(container, items) {
+  items.forEach(item => {
+    if (item.t === 'cat') {
+      const el = document.createElement('div');
+      el.className = 'cat-label';
+      el.textContent = item.label;
+      container.appendChild(el);
+    } else if (item.t === 'show') {
+      const el = document.createElement('div');
+      el.className = 'acc-item';
+      el.dataset.imgKey = item.imgKey || '';
+      el.dataset.itemLabel = item.label;
+      el.textContent = item.label;
+      el.addEventListener('click', () => onShowClick(item, el));
+      container.appendChild(el);
+    } else if (item.t === 'acc') {
+      const wrap = document.createElement('div');
+      const header = document.createElement('div');
+      header.className = 'acc-header';
+      header.textContent = item.label;
+      const body = document.createElement('div');
+      body.className = 'acc-body';
+      buildItems(body, item.items);
+      header.addEventListener('click', () => toggleAcc(body));
+      wrap.appendChild(header);
+      wrap.appendChild(body);
+      container.appendChild(wrap);
+    }
+  });
+}
 
 // ── 메뉴 빌드 ─────────────────────────────────────────────────────────
 menuStructure.forEach(node => {
@@ -320,10 +352,8 @@ menuStructure.forEach(node => {
     menuPanel.appendChild(Object.assign(document.createElement('hr'), { className: 'menu-sep' }));
     return;
   }
-
   const wrap = document.createElement('div');
   wrap.className = 'menu-inner';
-
   if (node.t === 'nav') {
     const el = document.createElement('div');
     el.className = 'nav-item';
@@ -331,58 +361,33 @@ menuStructure.forEach(node => {
     el.textContent = node.label;
     el.addEventListener('click', () => onNavClick(node.key, el));
     wrap.appendChild(el);
-
-  } else if (node.t === 'label') {
-    const el = document.createElement('div');
-    el.className = 'section-label';
-    el.textContent = node.label;
-    wrap.appendChild(el);
-
   } else if (node.t === 'acc') {
-    if (/▼ \d{4}/.test(node.label) && !firstYearSeen) {
-      wrap.style.marginTop = '16px';
-      firstYearSeen = true;
-    }
     const header = document.createElement('div');
     header.className = 'acc-header';
     header.textContent = node.label;
-
     const body = document.createElement('div');
     body.className = 'acc-body';
-
-    node.items.forEach(item => {
-      const el = document.createElement('div');
-      if (item.t === 'cat') {
-        el.className = 'cat-label';
-        el.textContent = item.label;
-      } else {
-        el.className = 'acc-item';
-        el.dataset.imgKey = item.imgKey || '';
-        el.dataset.itemLabel = item.label;
-        el.textContent = item.label;
-        el.addEventListener('click', () => onShowClick(item, el));
-      }
-      body.appendChild(el);
-    });
-
+    buildItems(body, node.items);
     header.addEventListener('click', () => toggleAcc(body));
     wrap.appendChild(header);
     wrap.appendChild(body);
   }
-
   menuPanel.appendChild(wrap);
 });
 
-// ── 아코디언 토글 ─────────────────────────────────────────────────────
+// ── 아코디언 토글 (형제만 닫기) ──────────────────────────────────────
 function toggleAcc(body) {
-  const isOpen = body.style.maxHeight && body.style.maxHeight !== '0px';
-  menuPanel.querySelectorAll('.acc-body').forEach(b => {
-    b.style.maxHeight = '0px';
-    b.classList.remove('open');
-  });
+  const isOpen = body.classList.contains('open');
+  const grandparent = body.parentElement?.parentElement;
+  if (grandparent) {
+    grandparent.querySelectorAll(':scope > * > .acc-body').forEach(b => {
+      b.style.maxHeight = '0px';
+      b.classList.remove('open');
+    });
+  }
   if (!isOpen) {
     body.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 8 + 'px';
+    body.style.maxHeight = '9999px';
   }
 }
 
@@ -402,6 +407,7 @@ function onNavClick(key, el) {
   textContent.innerHTML = html;
   textContent.classList.add('active');
   rightPanel.scrollTop = 0;
+  if (window.innerWidth <= 768) closePanelOnly();
 }
 
 // ── 전시 클릭 ─────────────────────────────────────────────────────────
@@ -426,6 +432,7 @@ function onShowClick(item, el) {
   });
   projectImgs.classList.add('active');
   rightPanel.scrollTop = 0;
+  if (window.innerWidth <= 768) closePanelOnly();
 }
 
 // ── 전체 active 초기화 ────────────────────────────────────────────────
@@ -465,6 +472,13 @@ function closeMenu() {
   returnToLanding();
 }
 
+function closePanelOnly() {
+  menuOpen = false;
+  menuPanel.classList.remove('open');
+  menuDivider.classList.remove('visible');
+  menuToggle.classList.remove('hidden');
+}
+
 function updateLangHref() {
   if (!currentState) { langBtn.href = 'en.html'; return; }
   const p = new URLSearchParams();
@@ -493,8 +507,12 @@ function restoreStateFromURL() {
       ? menuPanel.querySelector(`[data-img-key="${key}"]`)
       : [...menuPanel.querySelectorAll('.acc-item')].find(e => e.dataset.itemLabel === label);
     if (el) {
-      const body = el.closest('.acc-body');
-      if (body) { body.classList.add('open'); body.style.maxHeight = body.scrollHeight + 8 + 'px'; }
+      let ancestor = el.closest('.acc-body');
+      while (ancestor) {
+        ancestor.classList.add('open');
+        ancestor.style.maxHeight = '9999px';
+        ancestor = ancestor.parentElement?.closest('.acc-body');
+      }
       onShowClick({ imgKey: el.dataset.imgKey || null, label: el.dataset.itemLabel }, el);
     }
   }
