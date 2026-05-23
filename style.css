@@ -13,7 +13,7 @@ html, body {
   font-weight: 500;
   letter-spacing: 0.05em;
   cursor: default;
-  background: var(--bg, #faf9f6);
+  background: var(--bg, #ffffff);
 }
 
 /* ── LAYOUT ───────────────────────────────────────── */
@@ -45,14 +45,14 @@ html, body {
   top: 12px;
   left: 18px;
   z-index: 100;
-  background: var(--bg, #faf9f6);
+  background: #000;
   border: none;
   cursor: pointer;
   font: inherit;
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.1em;
-  color: #000;
+  color: #ffffff;
   padding: 3px 5px;
   line-height: 1;
 }
@@ -68,23 +68,17 @@ html, body {
   top: 12px;
   right: 18px;
   z-index: 100;
-  background: var(--bg, #faf9f6);
+  background: #000;
   border: none;
   cursor: pointer;
   font: inherit;
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.1em;
-  color: #000;
+  color: #ffffff;
   padding: 3px 5px;
   line-height: 1;
   text-decoration: none;
-}
-
-.lang-btn.content-open,
-.menu-toggle.content-open {
-  background: #000;
-  color: var(--bg, #faf9f6);
 }
 
 /* ── MENU PANEL ───────────────────────────────────── */
@@ -94,7 +88,7 @@ html, body {
   left: 0;
   bottom: 0;
   width: 25vw;
-  background: var(--bg, #faf9f6);
+  background: var(--bg, #ffffff);
   z-index: 50;
   overflow-y: auto;
   transform: translateX(-100%);
@@ -131,7 +125,7 @@ html, body {
   font-size: 12px;
   font-weight: 900;
   letter-spacing: 0.1em;
-  color: var(--bg, #faf9f6);
+  color: var(--bg, #ffffff);
   background: #000;
   border: none;
   cursor: pointer;
@@ -204,9 +198,15 @@ html, body {
   text-decoration-color: #000;
 }
 
+/* 연도 아코디언 래퍼: 커서 포인터 */
+.acc-body > div {
+  cursor: pointer;
+}
+
 /* 연도 아코디언 내부: ▼ 너비만큼 들여쓰기 */
 .acc-body > div > .acc-body {
   padding-left: 1.3em;
+  cursor: default;
 }
 
 .acc-body.open {
@@ -245,7 +245,7 @@ html, body {
   position: relative;
   width: 50%;
   height: 100%;
-  background: var(--bg, #faf9f6);
+  background: var(--bg, #ffffff);
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -273,7 +273,7 @@ html, body {
 .project-images {
   display: none;
   padding: 10px;
-  background: var(--bg, #faf9f6);
+  background: var(--bg, #ffffff);
 }
 
 .project-images.active { display: block; }
@@ -292,7 +292,7 @@ html, body {
   padding: 28px 32px;
   line-height: 1.5;
   color: #000;
-  background: var(--bg, #faf9f6);
+  background: var(--bg, #ffffff);
   min-height: 100%;
 }
 
